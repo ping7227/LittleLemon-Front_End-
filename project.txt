@@ -1,0 +1,1412 @@
+================================================================================
+PROJECT FILE STRUCTURE
+================================================================================
+Root: LittleLemon
+├── public
+├── src
+└── package.json
+├── public/
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src/
+│   ├── components
+│   ├── App.css
+│   ├── App.js
+│   ├── App.test.js
+│   ├── api.js
+│   ├── index.css
+│   ├── index.js
+│   ├── reportWebVitals.js
+│   └── setupTests.js
+│   ├── components/
+│   │   ├── Booking.js
+│   │   ├── BookingForm.js
+│   │   ├── ConfirmedBooking.js
+│   │   ├── Footer.js
+│   │   ├── Header.js
+│   │   ├── HomePage.js
+│   │   ├── Main.js
+│   │   └── Nav.js
+
+=================================== package.json ===============================
+
+{
+  "name": "little-lemon-website",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.6.2",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+
+
+================================================================================
+=================================== public\index.html ==========================
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://raw.githubusercontent.com/Meta-Front-End-Developer-PC/capstone/master/api.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Website for Little Lemon Restaurant" 
+    />
+    <meta name="og:title" content="Little Lemon Website"/>
+    <meta name="og:description" content="Website for Little Lemon Restaurant"/>
+    <meta name="og:image" content="./littlelemon_logo.png"/>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+
+
+  </body>
+</html>
+
+
+================================================================================
+=================================== public\manifest.json =======================
+
+{
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
+
+
+================================================================================
+=================================== public\robots.txt ==========================
+
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+
+
+================================================================================
+=================================== src\App.css ================================
+
+/* =======================================================
+   1. Global Styles & Typography
+   ======================================================= */
+
+body {
+  margin: 0;
+  font-family: 'Karla', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Markazi Text', serif;
+  color: #333333;
+}
+
+p, a, li, label, input, select {
+  font-family: 'Karla', sans-serif;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* =======================================================
+   2. Header & Navigation
+   ======================================================= */
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.nav-logo {
+  height: 50px;
+}
+
+.header-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav a {
+  text-decoration: none;
+  color: #333333;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.header-nav a:hover {
+  color: #495e57;
+}
+
+/* =======================================================
+   3. Hero / Call to Action Section
+   ======================================================= */
+
+.hero {
+  background-color: #495e57;
+  color: white;
+  padding: 40px 0;
+}
+
+.hero .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.hero-content h1 {
+  color: #F4CE14;
+  font-size: 4rem;
+  margin: 0;
+}
+
+.hero-content h2 {
+  color: white;
+  font-size: 2.5rem;
+  margin-top: -10px;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+.hero-image img {
+  width: 300px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.btn-primary {
+  background-color: #F4CE14;
+  color: black;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 20px;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #e2b90d;
+}
+
+/* =======================================================
+   4. Specials Section
+   ======================================================= */
+
+.specials-section {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.specials-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.specials-header h2 {
+  font-size: 3rem;
+  color: #333333;
+}
+
+.btn-secondary {
+  background-color: #333333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #495e57;
+}
+
+.specials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.special-card {
+  background-color: #EDEFEE;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.special-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.special-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.special-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 15px;
+}
+
+.special-card-header h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: #333;
+}
+
+.special-card-header .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #EE9972;
+  margin: 0;
+}
+
+.special-card-content p {
+  color: #495e57;
+  line-height: 1.4;
+  flex-grow: 1;
+}
+
+.order-link {
+  font-weight: bold;
+  color: #333333;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.order-link:hover {
+  text-decoration: underline;
+}
+
+/* =======================================================
+   5. Testimonials Section
+   ======================================================= */
+.testimonials-section {
+  background-color: #495e57;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.testimonials-section h2 {
+  color: #F4CE14;
+  font-size: 3rem;
+  margin-bottom: 40px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 0 20px;
+}
+
+.testimonial-card {
+  background-color: #EDEFEE;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  color: #333;
+}
+
+.testimonial-rating {
+  font-size: 1.5rem;
+  color: #F4CE14;
+  margin-bottom: 15px;
+}
+
+.dimmed-stars {
+  color: #cccccc;
+}
+
+.testimonial-comment {
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.testimonial-name {
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: right;
+  color: #495e57;
+}
+
+/* =======================================================
+   6. About Section
+   ======================================================= */
+.about-section {
+  padding: 80px 20px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.about-content {
+  flex: 1;
+}
+
+.about-content h2 {
+  font-size: 3.5rem;
+  color: #495e57;
+  margin-bottom: 20px;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.about-image {
+  flex: 1;
+  text-align: center;
+}
+
+.about-image img {
+  max-width: 350px;
+  width: 100%;
+  border-radius: 16px;
+}
+
+
+/* =======================================================
+   7. Footer
+   ======================================================= */
+.footer {
+  background-color: #333333;
+  color: #EDEFEE;
+  padding: 50px 0;
+  margin-top: 60px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.footer-logo {
+  max-width: 100px;
+  height: auto;
+}
+
+.footer h4 {
+  font-family: 'Markazi Text', serif;
+  font-size: 1.5rem;
+  color: #F4CE14;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #EDEFEE;
+  transition: text-decoration 0.2s;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* =======================================================
+   8. Media Queries for Responsiveness
+   ======================================================= */
+
+@media (max-width: 960px) {
+  .specials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .nav ul {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-image {
+    margin-top: 30px;
+  }
+
+  .about-section {
+    flex-direction: column-reverse; /* Puts image above text on mobile */
+    text-align: center;
+  }
+
+  .about-image {
+    margin-bottom: 40px;
+  }
+
+  .footer .container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .specials-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .specials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+header img {
+  height: 400px;
+  border-radius: 12pt;
+}
+
+footer section {
+
+  justify-items: center;
+  width:80%;
+    margin-left: 10%;
+  gap: 20px;
+  }
+
+
+footer {
+  padding: 20px;
+}
+
+footer img {
+  height:300px;
+}
+
+form {
+  display: grid;
+  max-width: 200px;
+  gap: 20px;
+}
+
+@media (max-width: 700px) {
+  header section, footer section {
+    display: grid;
+    grid-auto-flow: row;
+  }
+}
+
+@media (min-width: 701px) {
+footer section {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display:grid;
+}
+header section {
+  grid-template-columns: 1fr 1fr;
+  display:grid;
+  justify-items: center;
+}
+}
+
+
+/* =======================================================
+   Styles for Booking Form & Confirmation Page
+   ======================================================= */
+
+.booking-section {
+  padding: 40px 20px;
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #495e57;
+  color: white;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.booking-section h2 {
+  color: #F4CE14;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+form {
+  display: grid;
+  max-width: 400px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-field label {
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.form-field input,
+.form-field select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  font-family: 'Karla', sans-serif;
+}
+
+.form-submit input {
+  width: 100%;
+  background-color: #F4CE14;
+  color: black;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+.form-submit input:hover:not(:disabled) {
+  background-color: #e2b90d;
+}
+
+.form-submit input:disabled {
+  background-color: #cccccc;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.confirmation-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: #495e57;
+    color: white;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirmation-section h1 {
+    color: #F4CE14;
+    font-size: 3rem;
+}
+
+.confirmation-section p {
+    font-size: 1.2rem;
+    max-width: 500px;
+}
+
+
+================================================================================
+=================================== src\App.js =================================
+
+import React from 'react';
+import './App.css';
+import Nav from "./components/Nav";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
+
+function App() {
+  return (
+    <>
+      <Nav />
+      <Main />
+      <Footer />
+    </>
+  );
+}
+
+export default App;
+
+
+================================================================================
+=================================== src\App.test.js ============================
+
+import { render, screen } from "@testing-library/react";
+import BookingForm from './components/BookingForm';
+import { initializeTimes, updateTimes } from './components/Main';
+
+// Test for the BookingForm component
+describe('BookingForm', () => {
+  test('Renders the BookingForm heading', () => {
+    // Mock props required by BookingForm
+    const mockDispatch = jest.fn();
+    const mockSubmitForm = jest.fn();
+    const availableTimes = ['17:00', '18:00', '19:00'];
+
+    render(
+      <BookingForm
+        availableTimes={availableTimes}
+        dispatch={mockDispatch}
+        submitForm={mockSubmitForm}
+      />
+    );
+
+    // Check if the label for the date input is rendered
+    const headingElement = screen.getByText("Choose Date");
+    expect(headingElement).toBeInTheDocument();
+  });
+
+  test('HTML5 validation attributes are present', () => {
+    const mockDispatch = jest.fn();
+    const mockSubmitForm = jest.fn();
+    const availableTimes = ['17:00', '18:00', '19:00'];
+
+    render(
+      <BookingForm
+        availableTimes={availableTimes}
+        dispatch={mockDispatch}
+        submitForm={mockSubmitForm}
+      />
+    );
+
+    // Test for date input
+    const dateInput = screen.getByLabelText(/Choose Date/);
+    expect(dateInput).toHaveAttribute('required');
+    expect(dateInput).toHaveAttribute('type', 'date');
+
+    // Test for time select
+    const timeSelect = screen.getByLabelText(/Choose Time/);
+    expect(timeSelect).toHaveAttribute('required');
+
+    // Test for guests input
+    const guestsInput = screen.getByLabelText(/Number of Guests/);
+    expect(guestsInput).toHaveAttribute('required');
+    expect(guestsInput).toHaveAttribute('min', '1');
+    expect(guestsInput).toHaveAttribute('max', '10');
+
+    // Test for occasion select
+    const occasionSelect = screen.getByLabelText(/Occasion/);
+    expect(occasionSelect).toHaveAttribute('required');
+  });
+});
+
+
+// Test for the state management functions
+describe('State management functions', () => {
+  test('initializeTimes returns a non-empty array', () => {
+    // Assuming fetchAPI returns an array of available times
+    const times = initializeTimes();
+    expect(Array.isArray(times)).toBe(true);
+    expect(times.length).toBeGreaterThan(0);
+  });
+
+  test('updateTimes returns the same value provided in the state', () => {
+    const currentState = ['17:00', '18:00'];
+    // The reducer's second argument (action) is not used to change state in this case,
+    // so the state should remain the same as what fetchAPI returns.
+    // We simulate a date change.
+    const action = { type: 'UPDATE_TIMES', payload: '2023-10-15' };
+    const newState = updateTimes(currentState, action);
+
+    // The function should return a new array based on the new date
+    expect(Array.isArray(newState)).toBe(true);
+    // The content will be different, but it should still be an array of strings
+    newState.forEach(time => {
+      expect(typeof time).toBe('string');
+    });
+  });
+});
+
+
+
+================================================================================
+=================================== src\api.js =================================
+
+// This file simulates API calls for fetching and submitting data.
+
+// Function to generate seeded random numbers for consistent results
+const seededRandom = (seed) => {
+    const m = 2 ** 35 - 31;
+    const a = 185852;
+    let s = seed % m;
+    return () => (s = s * a % m) / m;
+};
+
+// Function to fetch available booking times for a given date
+export const fetchAPI = (date) => {
+    let result = [];
+    // Use the date's day to seed the random number generator
+    let random = seededRandom(date.getDate());
+
+    // Generate a list of random times between 17:00 and 23:00
+    for (let i = 17; i <= 23; i++) {
+        if (random() < 0.5) result.push(i + ':00');
+        if (random() > 0.5) result.push(i + ':30');
+    }
+    return result;
+};
+
+// Function to simulate a successful form submission
+export const submitAPI = (formData) => {
+    return true;
+};
+
+// --- Reducer functions for use with useReducer hook ---
+
+// The reducer function updates state based on the dispatched action
+export const updateTimes = (state, action) => {
+  if (action.type === 'UPDATE_TIMES') {
+    // When the date changes, fetch new times for that date
+    return fetchAPI(new Date(action.payload));
+  }
+  return state; // Return current state if action type is not matched
+};
+
+// The initializer function provides the initial state for available times
+export const initializeTimes = () => {
+  // Fetch times for today's date initially
+  return fetchAPI(new Date());
+};
+
+
+================================================================================
+=================================== src\components\Booking.js ==================
+
+import React from 'react';
+import BookingForm from './BookingForm';
+
+const Booking = (props) => {
+  return (
+    <BookingForm
+      availableTimes={props.availableTimes}
+      dispatch={props.dispatch}
+      submitForm={props.submitForm}
+    />
+  );
+};
+
+export default Booking;
+
+
+================================================================================
+=================================== src\components\BookingForm.js ==============
+
+import React, { useState } from "react";
+
+const BookingForm = ({ availableTimes, dispatch, submitForm }) => {
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [guests, setGuests] = useState(1);
+  const [occasion, setOccasion] = useState("Birthday");
+
+  // Client-side validation to ensure all fields are filled
+  const isFormValid = date && time && guests >= 1 && occasion;
+
+  const handleDateChange = (e) => {
+    const newDate = e.target.value;
+    setDate(newDate);
+    // Dispatch action to update times based on the new date
+    dispatch({ type: 'UPDATE_TIMES', payload: newDate });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isFormValid) {
+      submitForm({ date, time, guests, occasion });
+    }
+  };
+
+  return (
+    <section className="booking-section">
+      <h2>Reserve a Table</h2>
+      <form onSubmit={handleSubmit}>
+        <fieldset>
+          <div className="form-field">
+            <label htmlFor="book-date">Choose Date</label>
+            <input
+              id="book-date"
+              value={date}
+              onChange={handleDateChange}
+              type="date"
+              required
+            />
+          </div>
+          <div className="form-field">
+            <label htmlFor="book-time">Choose Time</label>
+            <select
+              id="book-time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              required
+            >
+              <option value="" disabled>Select a Time</option>
+              {availableTimes.map((t) => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+          </div>
+          <div className="form-field">
+            <label htmlFor="book-guests">Number of Guests</label>
+            <input
+              id="book-guests"
+              type="number"
+              min="1"
+              max="10"
+              value={guests}
+              onChange={(e) => setGuests(Number(e.target.value))}
+              required
+            />
+          </div>
+          <div className="form-field">
+            <label htmlFor="book-occasion">Occasion</label>
+            <select
+              id="book-occasion"
+              value={occasion}
+              onChange={(e) => setOccasion(e.target.value)}
+              required
+            >
+              <option>Birthday</option>
+              <option>Anniversary</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div className="form-submit">
+            <input
+              aria-label="Submit reservation details"
+              type="submit"
+              value="Make Your Reservation"
+              disabled={!isFormValid}
+            />
+          </div>
+        </fieldset>
+      </form>
+    </section>
+  );
+};
+
+export default BookingForm;
+
+
+================================================================================
+=================================== src\components\ConfirmedBooking.js =========
+
+import React from "react";
+import { Link } from "react-router-dom";
+
+const ConfirmedBooking = () => {
+    return (
+        <section className="confirmation-section">
+            <h1>Your booking has been confirmed!</h1>
+            <p>Thank you for choosing Little Lemon. We look forward to seeing you.</p>
+            <Link to="/" className="btn-primary" style={{ marginTop: '30px' }}>
+                Back to Home
+            </Link>
+        </section>
+    );
+};
+
+export default ConfirmedBooking;
+
+
+================================================================================
+=================================== src\components\Footer.js ===================
+
+import React from "react";
+import { Link } from "react-router-dom";
+import small_logo from "../images/small_logo.png";
+
+const Footer = () => {
+    return(
+        <footer className="footer">
+            <div className="container">
+                <div className="footer-content">
+                    <div className="footer-logo-section">
+                        <img src={small_logo} alt="Little Lemon small logo" className="footer-logo" />
+                    </div>
+                    <div className="footer-links">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to="/about">About</Link></li>
+                            <li><Link to="/menu">Menu</Link></li>
+                            <li><Link to="/booking">Reservations</Link></li>
+                        </ul>
+                    </div>
+                    <div className="footer-contact">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li>123 Lemon St, Chicago, IL</li>
+                            <li>(312) 555-1234</li>
+                            <li>contact@littlelemon.com</li>
+                        </ul>
+                    </div>
+                    <div className="footer-social">
+                        <h4>Social Media</h4>
+                        <ul>
+                            <li><a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                            <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                            <li><a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;
+
+
+================================================================================
+=================================== src\components\Header.js ===================
+
+import React from "react";
+import food1 from "../images/food1.avif"
+import { Link } from "react-router-dom";
+
+
+const Header = () => {
+    return(
+        <header>
+            <section>
+            <div>
+            <h2>Little Lemon</h2>
+            <h3>Chicago</h3>
+            <p>We are a family owned Mediterraneran restaurant, focused on traditional recipes servred with a modern twist.</p>
+            <Link to="/Booking"><button aria-label="On Click">Reserve Table</button></Link>
+            </div>
+            <div>
+                <img src={food1} />
+            </div>
+            </section>
+        </header>
+    )
+}
+
+export default Header;
+
+================================================================================
+=================================== src\components\HomePage.js =================
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+// Corrected paths to point to the 'images' folder
+import heroImage from '../images/restaurantfood.jpg';
+import greekSalad from '../images/greek salad.jpg';
+import bruchetta from '../images/bruchetta.jpg';
+import lemonDessert from '../images/lemon dessert.jpg';
+
+// Data for the specials section
+const specials = [
+  {
+    title: 'Greek Salad',
+    price: '$12.99',
+    image: greekSalad,
+    description: 'The famous Greek salad of crispy lettuce, peppers, olives, and our Chicago-style feta cheese, garnished with crunchy garlic and rosemary croutons.',
+  },
+  {
+    title: 'Bruchetta',
+    price: '$5.99',
+    image: bruchetta,
+    description: 'Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil.',
+  },
+  {
+    title: 'Lemon Dessert',
+    price: '$5.00',
+    image: lemonDessert,
+    description: "This comes straight from grandma's recipe book—every last ingredient is as authentic as can be imagined.",
+  },
+];
+
+// Data for the testimonials section
+const testimonials = [
+  {
+    name: 'Sarah L.',
+    rating: 5,
+    comment: 'The best Mediterranean food in Chicago! The Greek salad was so fresh, and the lemon dessert was the perfect end to the meal.',
+  },
+  {
+    name: 'John D.',
+    rating: 5,
+    comment: "A wonderful experience from start to finish. The ambiance is cozy and the staff is incredibly friendly. Highly recommend the Bruschetta.",
+  },
+  {
+    name: 'Emily R.',
+    rating: 4,
+    comment: 'A true gem. The food is authentic and delicious. It feels like a little piece of the Mediterranean right here in the city.',
+  },
+];
+
+
+const HomePage = () => {
+  return (
+    <>
+      {/* Hero Section */}
+      <header className="hero">
+        <div className="container">
+          <div className="hero-content">
+            <h1>Little Lemon</h1>
+            <h2>Chicago</h2>
+            <p>
+              We are a family-owned Mediterranean restaurant focused on
+              traditional recipes served with a modern twist.
+            </p>
+            <Link to="/booking" className="btn-primary">
+              Reserve a Table
+            </Link>
+          </div>
+          <div className="hero-image">
+            <img src={heroImage} alt="Delicious food served at Little Lemon" />
+          </div>
+        </div>
+      </header>
+
+      {/* Specials Section */}
+      <section className="specials-section container">
+        <div className="specials-header">
+          <h2>This week's specials!</h2>
+          <Link to="/menu" className="btn-secondary">
+            Online Menu
+          </Link>
+        </div>
+        <div className="specials-grid">
+          {specials.map((item) => (
+            <div key={item.title} className="special-card">
+              <img src={item.image} alt={item.title} />
+              <div className="special-card-content">
+                <div className="special-card-header">
+                  <h3>{item.title}</h3>
+                  <p className="price">{item.price}</p>
+                </div>
+                <p>{item.description}</p>
+                <Link to="/order" className="order-link">
+                  Order a delivery
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="testimonials-section">
+        <div className="container">
+          <h2>What Our Customers Say</h2>
+          <div className="testimonials-grid">
+            {testimonials.map((testimonial) => (
+              <div key={testimonial.name} className="testimonial-card">
+                <div className="testimonial-rating">
+                  {'★'.repeat(testimonial.rating)}
+                  <span className="dimmed-stars">{'★'.repeat(5 - testimonial.rating)}</span>
+                </div>
+                <p className="testimonial-comment">"{testimonial.comment}"</p>
+                <p className="testimonial-name">- {testimonial.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section - Reusing an existing asset */}
+      <section className="about-section container">
+        <div className="about-content">
+          <h2>About Little Lemon</h2>
+          <p>
+            Founded in Chicago by Italian brothers Mario and Adrian, Little Lemon
+            is a charming neighborhood bistro that serves simple, authentic Mediterranean
+            food in a lively and casual environment.
+            <br/><br/>
+            Driven by a shared passion for their family's traditional recipes,
+            the brothers have created a unique dining experience that blends heritage
+            with a modern flair, using only the freshest locally-sourced ingredients.
+          </p>
+        </div>
+        <div className="about-image">
+            <img src={bruchetta} alt="A serving of bruschetta" />
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default HomePage;
+
+
+================================================================================
+=================================== src\components\Main.js =====================
+
+import React, { useReducer } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Booking from "./Booking";
+import ConfirmedBooking from "./ConfirmedBooking";
+import HomePage from "./HomePage";
+import { initializeTimes, updateTimes, submitAPI } from "../api";
+
+const Main = () => {
+  const [availableTimes, dispatch] = useReducer(updateTimes, [], initializeTimes);
+  const navigate = useNavigate();
+
+  const submitForm = (formData) => {
+    if (submitAPI(formData)) {
+      navigate("/confirmed");
+    }
+  };
+
+  return (
+    <main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/booking"
+          element={
+            <Booking
+              availableTimes={availableTimes}
+              dispatch={dispatch}
+              submitForm={submitForm}
+            />
+          }
+        />
+        <Route path="/confirmed" element={<ConfirmedBooking />} />
+      </Routes>
+    </main>
+  );
+};
+
+export default Main;
+
+
+================================================================================
+=================================== src\components\Nav.js ======================
+
+import React from "react";
+import { Link } from "react-router-dom";
+import littlelemon_logo from "../images/littlelemon_logo.png";
+
+const Nav = () => {
+    return(
+        <nav className="container header-nav">
+            <Link to="/">
+                <img src={littlelemon_logo} alt="Little Lemon Logo" className="nav-logo" />
+            </Link>
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/about">About</Link></li>
+                <li><Link to="/menu">Menu</Link></li>
+                <li><Link to="/booking">Reservations</Link></li>
+                <li><Link to="/order">Order Online</Link></li>
+                <li><Link to="/login">Login</Link></li>
+            </ul>
+        </nav>
+    );
+};
+
+export default Nav;
+
+
+================================================================================
+=================================== src\index.css ==============================
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+================================================================================
+=================================== src\index.js ===============================
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+    <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
+
+================================================================================
+=================================== src\reportWebVitals.js =====================
+
+const reportWebVitals = onPerfEntry => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(onPerfEntry);
+      getFID(onPerfEntry);
+      getFCP(onPerfEntry);
+      getLCP(onPerfEntry);
+      getTTFB(onPerfEntry);
+    });
+  }
+};
+
+export default reportWebVitals;
+
+
+================================================================================
+=================================== src\setupTests.js ==========================
+
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// allows you to do things like:
+// expect(element).toHaveTextContent(/react/i)
+// learn more: https://github.com/testing-library/jest-dom
+import '@testing-library/jest-dom';
+
+
+================================================================================
